@@ -86,9 +86,26 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete an event
+// router.delete('/:id', async (req, res) => {
+//   try {
+//     const event = await Event.findByIdAndDelete(req.params.id);
+    
+//     if (!event) {
+//       return res.status(404).json({ message: 'Event not found' });
+//     }
+    
+//     res.json({ message: 'Event deleted' });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: 'Server error' });
+//   }
+// });
+
 router.delete('/:id', async (req, res) => {
   try {
+    console.log('Deleting event with ID:', req.params.id);
     const event = await Event.findByIdAndDelete(req.params.id);
+    console.log('Delete result:', event);
     
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
@@ -96,7 +113,7 @@ router.delete('/:id', async (req, res) => {
     
     res.json({ message: 'Event deleted' });
   } catch (err) {
-    console.error(err);
+    console.error('Error during delete:', err);
     res.status(500).json({ message: 'Server error' });
   }
 });
